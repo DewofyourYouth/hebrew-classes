@@ -1,0 +1,24 @@
+# Hugo build output
+/public/
+/resources/_gen/
+/.hugo_build.lock
+
+# Dependency directories (if using npm tooling for theme/assets)
+/node_modules/
+
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.swp
+*~

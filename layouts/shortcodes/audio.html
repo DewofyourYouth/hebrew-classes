@@ -1,0 +1,67 @@
+{{- $srcRaw := .Get "src" -}}
+{{- if not $srcRaw -}}
+  {{- errorf "audio shortcode: src is required: %s" .Position -}}
+{{- end -}}
+
+{{- $truthy := slice "true" "1" "yes" "on" -}}
+{{- $srcURL := urls.Parse $srcRaw -}}
+{{- $srcPath := strings.TrimPrefix "/" $srcURL.Path -}}
+{{- $src := "" -}}
+
+{{- if $srcURL.IsAbs -}}
+  {{- $src = $srcURL.String -}}
+{{- else -}}
+  {{- $resource := "" -}}
+  {{- with $.Page.Resources.GetMatch $srcPath -}}
+    {{- $resource = . -}}
+  {{- else -}}
+    {{- with resources.Get $srcPath -}}
+      {{- $resource = . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $resource -}}
+    {{- $src = $resource.RelPermalink -}}
+  {{- else if fileExists (path.Join "static" $srcPath) -}}
+    {{- $src = relURL $srcPath -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $src -}}
+  {{- errorf "audio shortcode: unable to resolve src %q: %s" $srcRaw .Position -}}
+{{- end -}}
+
+{{- $title := .Get "title" | default "Audio Recording" -}}
+{{- $caption := .Get "caption" -}}
+{{- $download := true -}}
+{{- with .Get "download" -}}
+  {{- $download = in $truthy (lower .) -}}
+{{- end -}}
+
+{{- $loop := false -}}
+{{- with .Get "loop" -}}
+  {{- $loop = in $truthy (lower .) -}}
+{{- end -}}
+
+{{- $preload := lower (.Get "preload" | default "metadata") -}}
+{{- if not (in (slice "metadata" "auto" "none") $preload) -}}
+  {{- errorf "audio shortcode: invalid preload %q: %s" $preload .Position -}}
+{{- end -}}
+
+<figure class="audio-recording">
+  <figcaption class="audio-recording__title">{{ $title | markdownify }}</figcaption>
+  <audio class="audio-recording__player" controls preload="{{ $preload }}"{{ if $loop }} loop{{ end }}>
+    <source src="{{ $src }}">
+    <p>Your browser cannot play this audio. <a href="{{ $src }}">Download audio</a>.</p>
+  </audio>
+  {{- if or $caption $download -}}
+    <div class="audio-recording__meta">
+      {{- with $caption -}}
+        <span class="audio-recording__caption">{{ . | markdownify }}</span>
+      {{- end -}}
+      {{- if $download -}}
+        <a class="audio-recording__download" href="{{ $src }}" download>Download</a>
+      {{- end -}}
+    </div>
+  {{- end -}}
+</figure>

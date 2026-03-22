@@ -1,0 +1,64 @@
+baseURL: "https://example.org/"
+title: "שיעורים בעברית"
+theme: "blowfish"
+languageCode: "en-us"
+defaultContentLanguage: "en"
+enableRobotsTXT: true
+enableEmoji: true
+summaryLength: 30
+cleanDestinationDir: true
+
+pagination:
+  pagerSize: 10
+
+imaging:
+  anchor: "Center"
+
+params:
+  colorScheme: "avocado"
+  homepage:
+    layout: "hero"
+    showRecent: true
+    homepageImage: "images/hero.jpg"
+  article:
+    showHero: true
+    heroStyle: "basic"
+  list:
+    showSummary: true
+
+taxonomies:
+  tag: "tags"
+  category: "categories"
+  author: "authors"
+  series: "series"
+
+sitemap:
+  changefreq: "weekly"
+  filename: "sitemap.xml"
+  priority: 0.5
+
+outputs:
+  home:
+    - "HTML"
+    - "RSS"
+    - "JSON"
+
+menu:
+  main:
+    - name: "Home"
+      pageRef: "/"
+      weight: 10
+    - name: "Blog"
+      pageRef: "/blog"
+      weight: 20
+    - name: "About"
+      pageRef: "/about"
+      weight: 30
+    - name: "Contact"
+      pageRef: "/contact"
+      weight: 40
+
+module:
+  hugoVersion:
+    extended: true
+    min: "0.141.0"
