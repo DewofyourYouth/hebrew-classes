@@ -1,0 +1,29 @@
+{{- if .IsPage -}}
+  {{- $socialImageURL := "" -}}
+  {{- with .Resources.ByType "image" -}}
+    {{- range slice "*featured*" "*cover*" "*thumbnail*" "*feature*" -}}
+      {{- if and (not $socialImageURL) ($.Resources.GetMatch .) -}}
+        {{- $socialImageURL = ($.Resources.GetMatch .).RelPermalink | absURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if not $socialImageURL -}}
+    {{- with .Site.Params.defaultSocialImage -}}
+      {{- if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") -}}
+        {{- $socialImageURL = . -}}
+      {{- else -}}
+        {{- with resources.Get . -}}
+          {{- $socialImageURL = .RelPermalink | absURL -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if $socialImageURL -}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ $socialImageURL }}">
+    <meta property="og:image" content="{{ $socialImageURL }}">
+    <meta property="og:image:alt" content="{{ .Title | plainify }}">
+  {{- end -}}
+{{- end -}}

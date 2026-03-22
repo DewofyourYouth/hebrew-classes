@@ -16,6 +16,7 @@ imaging:
 
 params:
   colorScheme: "avocado"
+  defaultSocialImage: "images/hero.jpg"
   homepage:
     layout: "hero"
     showRecent: true
