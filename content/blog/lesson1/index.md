@@ -34,10 +34,11 @@ Son iki fiilin çekim tablolarını doldurmayı deneyin.
 
 {{< audio title="Ben - Ani הלך" src="audio/ani.m4a" >}}
 {{< audio title="Biz - Anachnu הלך" src="audio/anachnu.m4a" >}}
-{{< audio title="Sen - Ata הלך" src="audio/ata.m4a" >}}
-{{< audio title="Sen - At הלך" src="audio/at.m4a" >}}
-{{< audio title="O - Hu הלך" src="audio/hu.m4a" >}}
-{{< audio title="Siz - Atem הלך" src="audio/atem.m4a" >}}
-{{< audio title="Siz - Aten הלך" src="audio/aten.m4a" >}}
-{{< audio title="Onlar - Hem הלך" src="audio/hem.m4a" >}}
-{{< audio title="Onlar - Hen הלך" src="audio/hen.m4a" >}}
+{{< audio title="Sen - Ata ♂️ הלך" src="audio/ata.m4a" >}}
+{{< audio title="Sen - At ♀️ הלך" src="audio/at.m4a" >}}
+{{< audio title="O - Hu ♂️ הלך" src="audio/hu.m4a" >}}
+{{< audio title="O - Hi ♀️ הלך" src="audio/hee.m4a" >}}
+{{< audio title="Siz - Atem ♂️ הלך" src="audio/atem.m4a" >}}
+{{< audio title="Siz - Aten ♀️ הלך" src="audio/aten.m4a" >}}
+{{< audio title="Onlar - Hem ♂️ הלך" src="audio/hem.m4a" >}}
+{{< audio title="Onlar - Hen ♀️ הלך" src="audio/hen.m4a" >}}
