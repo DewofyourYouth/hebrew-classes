@@ -42,8 +42,11 @@
     "Rubik", "Heebo", "Assistant", "Noto Sans Hebrew", ui-sans-serif, system-ui,
     sans-serif;
   --font-body:
-    "Heebo", "Assistant", "Rubik", "Noto Sans Hebrew", ui-sans-serif, system-ui,
-    sans-serif;
+    "Alef", "Heebo", "Assistant", "Rubik", "Noto Sans Hebrew", ui-sans-serif,
+    system-ui, sans-serif;
+  --font-hebrew:
+    "Alef", "Heebo", "Assistant", "Rubik", "Noto Sans Hebrew", ui-sans-serif,
+    system-ui, sans-serif;
   --reading-width: 72ch;
 }
 
@@ -54,7 +57,7 @@ body {
 }
 
 html {
-  font-size: clamp(16px, 0.2vw + 15px, 18px);
+  font-size: clamp(17px, 0.22vw + 15px, 19px);
 }
 
 body {
@@ -119,8 +122,8 @@ li,
 td,
 th,
 blockquote {
-  line-height: 1.74;
-  font-size: 1.03rem;
+  line-height: 1.8;
+  font-size: 1.06rem;
 }
 
 .prose {
@@ -151,7 +154,7 @@ article.max-w-full.prose {
   max-width: 100%;
   border: 1px solid rgba(0, 58, 140, 0.18);
   table-layout: auto;
-  font-size: 0.94rem;
+  font-size: 0.98rem;
 }
 
 .prose:not(.prose-invert) th {
@@ -249,12 +252,19 @@ aside {
 
 /* Keep Hebrew readable when mixed with LTR content */
 :lang(he) {
-  font-family:
-    "Heebo", "Alef", "Assistant", "Rubik", "Noto Sans Hebrew", ui-sans-serif,
-    system-ui, sans-serif;
+  font-family: var(--font-hebrew);
+  font-size: 1.08em;
   letter-spacing: normal;
-  word-spacing: 0.02em;
-  line-height: 1.8;
+  word-spacing: 0.04em;
+  line-height: 1.9;
+}
+
+.hebrew-text {
+  font-family: var(--font-hebrew);
+  font-size: 1.08em;
+  letter-spacing: normal;
+  word-spacing: 0.04em;
+  line-height: 1.9;
 }
 
 /* Hero overlay tuning for Blowfish hero layout */
