@@ -1,0 +1,58 @@
+{{ if .HasShortcode "github" }}
+  {{ $repoCards := slice "github" }}
+  {{ $hasRepoCards := false }}
+  {{ range $repoCards }}
+    {{ if $.Page.HasShortcode . }}
+      {{ $hasRepoCards = true }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $hasRepoCards }}
+    {{ $repoColors := site.Data.repoColors }}
+    {{ $cssRules := slice }}
+
+    {{/* default color */}}
+    {{ $cssRules = $cssRules | append ".language-dot[data-language=\"default\"] { background-color: #0077b6; }" }}
+
+    {{/* Hugging Face model color */}}
+    {{ $cssRules = $cssRules | append ".language-dot[data-language=\"model\"] { background-color: #ff6b35; }" }}
+
+    {{ range $lang, $color := $repoColors }}
+      {{ if $color }}
+        {{ $cssRules = $cssRules | append (printf ".language-dot[data-language=\"%s\"] { background-color: %s; }" $lang $color) }}
+      {{ end }}
+    {{ end }}
+    {{ $repoCardCSS := resources.FromString "css/repo-cards.css" (delimit $cssRules "\n")
+      | minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512")
+    }}
+    <link rel="stylesheet" href="{{ $repoCardCSS.RelPermalink }}" integrity="{{ $repoCardCSS.Data.Integrity }}">
+  {{ end }}
+{{ end }}
+
+{{/* tabs */}}
+{{ if .Page.HasShortcode "tabs" }}
+  {{ $tabJS := resources.Get "js/shortcodes/tabs.js" }}
+  {{ with $tabJS | minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+  {{ end }}
+{{ end }}
+
+{{/* Firebase */}}
+{{ if site.Params.firebase.apiKey }}
+  {{ $firebase := resources.Get "js/firebase.js" }}
+  {{ $firebase = $firebase | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script type="module" src="{{ $firebase.RelPermalink }}" integrity="{{ $firebase.Data.Integrity }}"></script>
+
+  {{ if in (slice "page" "section") .Kind }}
+    {{ $translations := .AllTranslations }}
+    {{ with .File }}
+      {{ $path := .Path }}
+      {{ range $translations }}
+        {{ $path = replace $path (print "." .Lang ".md") ".md" }}
+      {{ end }}
+      {{ partial "inline/firebase-config.html" (dict "views" (printf "views_%s" $path) "likes" (printf "likes_%s" $path)) }}
+    {{ end }}
+  {{ else if eq .Kind "term" }}
+    {{/* no-op */}}
+  {{ end }}
+{{ end }}

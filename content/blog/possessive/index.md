@@ -6,7 +6,7 @@ description: "Türkçe konuşanlar için İbranice iyelik yapıları, Shel kulla
 summary: "Bu yazıda Türkçe konuşanlar için İbranice'de iyelik ekleri, Shel yapısı ve ספר, אוכל, תרנגולת örnekleriyle günlük kullanım arasındaki farkı anlatıyorum."
 categories: ["Dil Değişimi", "İbranice Gramer"]
 tags: ["İbranice", "Türkçe", "İyelik", "İyelik Ekleri", "Duygu Dora"]
-draft: true
+draft: false
 ---
 
 Son sohbetimizde İbranice'nin sahiplik yapısını nasıl kurduğuna baktık. Türkçe konuşan biri için bu mantık oldukça tanıdık, çünkü iki dil de isme doğrudan eklenen **iyelik ekleri** kullanıyor.
